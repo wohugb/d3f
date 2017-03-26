@@ -1,14 +1,15 @@
 {
-  "name": "angular2-webpack-starter",
-  "version": "5.4.1",
-  "description": "An Angular 2 Webpack Starter kit featuring Angular 2 (Router, Http, Forms, Services, Tests, E2E, Coverage), Karma, Protractor, Jasmine, Istanbul, TypeScript, and Webpack by AngularClass",
+  "name": "d3f",
+  "version": "1.0.1",
+  "description": "d3f主页",
   "keywords": [
-    "angular2",
-    "webpack",
-    "typescript"
+    "d3f",
+    "restapi",
+    "node",
+    "angular"
   ],
-  "author": "Patrick Stapleton <patrick@angularclass.com>",
-  "homepage": "https://github.com/angularclass/angular2-webpack-starter",
+  "author": "OndeLid Bandcap <ondeLid@bandcap.com>",
+  "homepage": "https://github.com/wohugb/d3f",
   "license": "MIT",
   "scripts": {
     "build:aot:prod": "npm run clean:dist && npm run clean:aot && webpack --config config/webpack.prod.js  --progress --profile --bail",
@@ -153,10 +154,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/angularclass/angular2-webpack-starter.git"
+    "url": "https://github.com/wohugb/d3f.git"
   },
   "bugs": {
-    "url": "https://github.com/angularclass/angular2-webpack-starter/issues"
+    "url": "https://github.com/wohugb/d3f/issues"
   },
   "engines": {
     "node": ">= 4.2.1",
