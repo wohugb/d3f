@@ -5,11 +5,10 @@ import {
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'about',
-  styles: [`
-  `],
+  selector: 'division',
+  styles: [``],
   template: `
-    <h1>关于</h1>
+    <h1>行政区划</h1>
     <div>
       For hot module reloading run
       <pre>npm run start:hmr</pre>
@@ -22,7 +21,7 @@ import { ActivatedRoute } from '@angular/router';
     <pre>this.localState = {{ localState | json }}</pre>
   `
 })
-export class AboutComponent implements OnInit {
+export class DivisionComponent implements OnInit {
 
   public localState: any;
   constructor(

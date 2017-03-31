@@ -22,23 +22,27 @@ import { AppState } from './app.service';
     <nav>
       <a [routerLink]=" ['./'] "
         routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}">
-        Index
+        索引
       </a>
       <a [routerLink]=" ['./home'] "
         routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}">
-        Home
+        主页
       </a>
       <a [routerLink]=" ['./detail'] "
         routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}">
-        Detail
+        详细
       </a>
       <a [routerLink]=" ['./barrel'] "
         routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}">
-        Barrel
+        滚筒
       </a>
       <a [routerLink]=" ['./about'] "
         routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}">
-        About
+        关于
+      </a>
+      <a [routerLink]=" ['./division'] "
+        routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}">
+        象征区划
       </a>
     </nav>
 
@@ -49,7 +53,7 @@ import { AppState } from './app.service';
     <pre class="app-state">this.appState.state = {{ appState.state | json }}</pre>
 
     <footer>
-      <span>WebPack Angular 2 Starter by <a [href]="url">@AngularClass</a></span>
+      <span>第三方服务 <a [href]="url">@d3f.pw</a></span>
       <div>
         <a [href]="url">
           <img [src]="angularclassLogo" width="25%">
