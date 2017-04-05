@@ -10,20 +10,17 @@ import { ActivatedRoute } from '@angular/router';
   template: `
     <h1>行政区划</h1>
     <div>
-      For hot module reloading run
-      <pre>npm run start:hmr</pre>
+      最新县及县以上行政区划代码 <pre>截止2016年7月31日</pre>
     </div>
     <div>
-      <h3>
-        patrick@AngularClass.com
-      </h3>
+      <h3>国家统计局设管司 <small>2017-03-10 10:33</small></h3>
     </div>
-    <pre>this.localState = {{ localState | json }}</pre>
+    <pre>{{ division | json }}</pre>
   `
 })
 export class DivisionComponent implements OnInit {
 
-  public localState: any;
+  public division: any;
   constructor(
     public route: ActivatedRoute
   ) {}
@@ -33,10 +30,10 @@ export class DivisionComponent implements OnInit {
       .data
       .subscribe((data: any) => {
         // your resolved data from route
-        this.localState = data.yourData;
+        this.division = data.yourData;
       });
 
-    console.log('hello `About` component');
+    console.log('加载 `行政区划` 组件');
     // static data that is bundled
     // var mockData = require('assets/mock-data/mock-data.json');
     // console.log('mockData', mockData);
@@ -51,8 +48,8 @@ export class DivisionComponent implements OnInit {
 
       System.import('../../assets/mock-data/mock-data.json')
         .then((json) => {
-          console.log('async mockData', json);
-          this.localState = json;
+          console.log('异步 mockData', json);
+          this.division = json;
         });
 
     });

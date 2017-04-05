@@ -1,22 +1,14 @@
-import {
-  Component,
-  OnInit,
-} from '@angular/core';
-/*
- * We're loading this component asynchronously
- * We are using some magic with es6-promise-loader that will wrap the module with a Promise
- * see https://github.com/gdi2290/es6-promise-loader for more info
- */
+import { Component, OnInit } from '@angular/core';
 
-console.log('`Detail` component loaded asynchronously');
+console.log('`Detail` 异步加载组件');
 
 @Component({
   selector: 'detail',
   template: `
-    <h1>Hello from Detail</h1>
+    <h1>子详细页面</h1>
     <span>
       <a [routerLink]=" ['./child-detail'] ">
-        Child Detail
+        子详细
       </a>
     </span>
     <router-outlet></router-outlet>
@@ -25,7 +17,7 @@ console.log('`Detail` component loaded asynchronously');
 export class DetailComponent implements OnInit {
 
   public ngOnInit() {
-    console.log('hello `Detail` component');
+    console.log('你好 `Detail` 组件');
   }
 
 }

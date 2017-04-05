@@ -1,3 +1,6 @@
+import * as jQuery from 'jquery';
+window['jQuery'] = jQuery;
+
 // TODO(gdi2290): switch to DLLs
 
 // Polyfills

@@ -42,7 +42,11 @@ import { AppState } from './app.service';
       </a>
       <a [routerLink]=" ['./division'] "
         routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}">
-        象征区划
+        行政区划
+      </a>
+      <a [routerLink]=" ['./survey'] "
+        routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}">
+        问卷调查
       </a>
     </nav>
 
@@ -50,22 +54,22 @@ import { AppState } from './app.service';
       <router-outlet></router-outlet>
     </main>
 
-    <pre class="app-state">this.appState.state = {{ appState.state | json }}</pre>
+    <!--<pre class="app-state">this.appState.state = {{ appState.state | json }}</pre>-->
 
     <footer>
-      <span>第三方服务 <a [href]="url">@d3f.pw</a></span>
-      <div>
+      <span>
+        第三方服务 <a [href]="url">@d3f.pw</a>
         <a [href]="url">
-          <img [src]="angularclassLogo" width="25%">
+          <img [src]="angularclassLogo" style="width:1rem">
         </a>
-      </div>
+      </span>
     </footer>
   `
 })
 export class AppComponent implements OnInit {
   public angularclassLogo = 'assets/img/angularclass-avatar.png';
-  public name = 'Angular 2 Webpack Starter';
-  public url = 'https://twitter.com/AngularClass';
+  public name = '第三方服务';
+  public url = 'http://www.d3f.pw';
 
   constructor(
     public appState: AppState

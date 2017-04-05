@@ -3,14 +3,14 @@ import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
-import { routes } from './child-detail.routes';
-import { ChildDetailComponent } from './child-detail.component';
+import { routes } from './survey-editor.routes';
+import { SurveyEditorComponent } from './survey-editor.component';
 
-console.log('`Detail` bundle loaded asynchronously');
+console.log('`Editor` 捆异步加载');
 
 @NgModule({
   declarations: [
-    ChildDetailComponent,
+    SurveyEditorComponent,
   ],
   imports: [
     CommonModule,
@@ -18,6 +18,6 @@ console.log('`Detail` bundle loaded asynchronously');
     RouterModule.forChild(routes),
   ],
 })
-export class ChildDetailModule {
+export class SurveyEditorModule {
   public static routes = routes;
 }
