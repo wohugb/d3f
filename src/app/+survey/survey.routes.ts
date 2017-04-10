@@ -1,8 +1,11 @@
 import { SurveyComponent } from './survey.component';
+import { SurveyEditorComponent } from './+survey-editor/survey-editor.component';
 
 export const routes = [
-  { path: '', children: [
-    { path: '', component: SurveyComponent },
-    { path: 'survey-editor', loadChildren: './+survey-editor#SurveyEditorModule' }
+  { path: '',
+    component: SurveyComponent,
+    children: [
+    { path: '', component: SurveyEditorComponent },
+    { path: 'survey-editor', component: SurveyEditorComponent }
   ]},
 ];

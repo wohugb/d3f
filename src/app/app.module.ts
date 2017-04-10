@@ -1,19 +1,12 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-import {
-  NgModule,
-  ApplicationRef
-} from '@angular/core';
-import {
-  removeNgStyles,
-  createNewHosts,
-  createInputTransfer
-} from '@angularclass/hmr';
-import {
-  RouterModule,
-  PreloadAllModules
-} from '@angular/router';
+import { NgModule, ApplicationRef } from '@angular/core';
+import { removeNgStyles, createNewHosts, createInputTransfer } from '@angularclass/hmr';
+import { RouterModule, PreloadAllModules } from '@angular/router';
+import { MaterialModule } from '@angular/material';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import 'hammerjs';
 
 /*
  * Platform and Environment providers/directives/pipes
@@ -24,6 +17,7 @@ import { ROUTES } from './app.routes';
 import { AppComponent } from './app.component';
 import { APP_RESOLVER_PROVIDERS } from './app.resolver';
 import { AppState, InternalStateType } from './app.service';
+import { NavBarComponent } from './navbar';
 import { HomeComponent } from './home';
 import { AboutComponent } from './about';
 import { DivisionComponent } from './division';
@@ -35,10 +29,7 @@ import '../styles/styles.scss';
 import '../styles/headings.css';
 
 // Application wide providers
-const APP_PROVIDERS = [
-  ...APP_RESOLVER_PROVIDERS,
-  AppState
-];
+const APP_PROVIDERS = [...APP_RESOLVER_PROVIDERS, AppState];
 
 type StoreType = {
   state: InternalStateType,
@@ -58,12 +49,15 @@ type StoreType = {
     HomeComponent,
     NoContentComponent,
     XLargeDirective,
+    NavBarComponent,
     // SurveyComponent
   ],
   imports: [ // import Angular's modules
     BrowserModule,
     FormsModule,
     HttpModule,
+    MaterialModule,
+    BrowserAnimationsModule,
     RouterModule.forRoot(ROUTES, { useHash: false, preloadingStrategy: PreloadAllModules })
   ],
   providers: [ // expose our Services and Providers into Angular's dependency injection

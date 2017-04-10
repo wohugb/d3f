@@ -2,21 +2,22 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-
+import { MaterialModule } from '@angular/material';
 import { routes } from './survey.routes';
 import { SurveyComponent }  from './survey.component';
-
-console.log('异步加载捆 `Survey` ');
+import { SurveyEditorComponent } from './+survey-editor/survey-editor.component';
+import { SurveyMenu } from './survey.menu';
+import { SurveyDemo } from './survey.demo';
 
 @NgModule({
-  declarations: [
-    SurveyComponent,
-  ],
+  declarations: [ SurveyComponent, SurveyEditorComponent ],
   imports: [
     CommonModule,
     FormsModule,
+    MaterialModule,
     RouterModule.forChild(routes),
   ],
+  providers: [ SurveyMenu, SurveyDemo ],
 })
 export class SurveyModule {
   public static routes = routes;

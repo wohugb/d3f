@@ -6,74 +6,38 @@ import {
   OnInit,
   ViewEncapsulation
 } from '@angular/core';
+
 import { AppState } from './app.service';
+import { Router, NavigationStart } from '@angular/router';
 
 /*
  * App Component
  * Top Level Component
  */
 @Component({
-  selector: 'app',
+  selector: 'd3f-app',
   encapsulation: ViewEncapsulation.None,
-  styleUrls: [
-    './app.component.css'
-  ],
-  template: `
-    <nav>
-      <a [routerLink]=" ['./'] "
-        routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}">
-        索引
-      </a>
-      <a [routerLink]=" ['./home'] "
-        routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}">
-        主页
-      </a>
-      <a [routerLink]=" ['./detail'] "
-        routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}">
-        详细
-      </a>
-      <a [routerLink]=" ['./barrel'] "
-        routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}">
-        滚筒
-      </a>
-      <a [routerLink]=" ['./about'] "
-        routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}">
-        关于
-      </a>
-      <a [routerLink]=" ['./division'] "
-        routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}">
-        行政区划
-      </a>
-      <a [routerLink]=" ['./survey'] "
-        routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}">
-        问卷调查
-      </a>
-    </nav>
-
-    <main>
-      <router-outlet></router-outlet>
-    </main>
-
-    <!--<pre class="app-state">this.appState.state = {{ appState.state | json }}</pre>-->
-
-    <footer>
-      <span>
-        第三方服务 <a [href]="url">@d3f.pw</a>
-        <a [href]="url">
-          <img [src]="angularclassLogo" style="width:1rem">
-        </a>
-      </span>
-    </footer>
-  `
+  styleUrls: ['./app.component.css'],
+  templateUrl: 'app.component.html'
 })
 export class AppComponent implements OnInit {
   public angularclassLogo = 'assets/img/angularclass-avatar.png';
   public name = '第三方服务';
   public url = 'http://www.d3f.pw';
+  public isDarkTheme = false;
+  public showShadow = false;
 
   constructor(
-    public appState: AppState
-  ) {}
+    public appState: AppState,
+    router: Router
+  ) {
+    this.showShadow = true;
+    // router.events.subscribe( (data: NavigationStart) => {
+    //   console.log('router.events', data);
+    //   // this.showShadow = data.url.startsWith('/survey');
+    //   // console.log('this.showShadow', this.showShadow);
+    // });
+  }
 
   public ngOnInit() {
     console.log('Initial App State', this.appState.state);

@@ -1,0 +1,24 @@
+<!-- TODO: figure out if the <nav> should go inside of a <header> element. -->
+<nav class="d3f-navbar">
+  <a md-button class="d3f-button" routerLink="/">
+    <span>面板</span>
+  </a>
+  <button md-icon-button [mdMenuTriggerFor]="menu">
+    <md-icon>more_vert</md-icon>表单管理
+  </button>
+  <md-menu #menu="mdMenu">
+    <a md-menu-item routerLink="survey/editor">
+      <md-icon>dialpad</md-icon>
+      <span>表单生成器</span>
+    </a>
+    <a md-menu-item routerLink="survey/renderer">
+      <md-icon>voicemail</md-icon>
+      <span>表单列表</span>
+    </a>
+    <a md-menu-item routerLink="survey/gather">
+      <md-icon>notifications_off</md-icon>
+      <span>搜集表单</span>
+    </a>
+  </md-menu>
+  <a md-button class="d3f-button" routerLink="conference">登录</a>
+</nav>

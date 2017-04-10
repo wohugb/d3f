@@ -58,6 +58,17 @@
       -detail.module.ts
       -detail.routes.ts
       -index.ts
+    -+survey
+      -+survey-editor
+        -index.ts
+        -survey-editor.component.ts
+        -survey-editor.module.ts
+        -survey-editor.routes.ts
+      -+survey-renderer
+        -index.ts
+        -survey-renderer.component.ts
+        -survey-renderer.module.ts
+        -survey-editor.routes.ts
     -about
       -about.component.spec.ts
       -about.component.ts
@@ -127,3 +138,5 @@
 -typedoc.json
 -webpack.config.js
 ```
+
+### 添加survey支持
