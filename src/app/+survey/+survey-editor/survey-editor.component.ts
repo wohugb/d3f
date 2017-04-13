@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import * as ko from 'knockout';
 import * as SurveyEditor from 'surveyjs-editor';
+import { Http, Headers, RequestOptions, Response } from '@angular/http';
+import { SurveyService } from '../../_services';
+import { Survey } from '../../_models/survey';
 
 let zhSurveyStrings = {
   // survey templates
@@ -28,7 +31,7 @@ let zhSurveyStrings = {
     text: '单输入'
   },
   // Strings in Editor
-    ed: {
+  ed: {
     addNewPage: '添加新页',
     newPageName: '页面',
     newQuestionName: 'question',
@@ -148,7 +151,7 @@ let zhSurveyStrings = {
     formEntry: '表单入口',
     testService: '测试服务',
     expressionHelp: '请输入一个布尔表达式. 必须返回 true 保证问题/页面可见.' +
-      '例如: {question1} = \'value1\' or ({question2} = 3 and {question3} < 5)',
+    '例如: {question1} = \'value1\' or ({question2} = 3 and {question3} < 5)',
     propertyIsEmpty: '请输入属性值',
     value: '值',
     text: '文本',
@@ -179,17 +182,17 @@ let zhSurveyStrings = {
     optionsCaption: '选择标题',
     qEditorTitle: '编辑问题: {0}',
     tabs: {
-        general: '一般',
-        fileOptions: '选项',
-        html: 'Html 编辑器',
-        columns: '列',
-        rows: '行',
-        choices: '选项',
-        visibleIf: '显示条件',
-        rateValues: '率值',
-        choicesByUrl: '来自Web选项',
-        matrixChoices: '默认选项',
-        multipleTextItems: '文本输入'
+      general: '一般',
+      fileOptions: '选项',
+      html: 'Html 编辑器',
+      columns: '列',
+      rows: '行',
+      choices: '选项',
+      visibleIf: '显示条件',
+      rateValues: '率值',
+      choicesByUrl: '来自Web选项',
+      matrixChoices: '默认选项',
+      multipleTextItems: '文本输入'
     },
     editProperty: '编辑属性 \'{0}\'',
     items: '[ 项目: {0} ]',
@@ -245,17 +248,38 @@ SurveyEditor.editorLocalization.currentLocale = 'zh';
 @Component({
   selector: 'd3f-survey-viewer',
   template: `<div id='surveyEditorContainer'></div>`,
+  styleUrls: ['survey-editor.component.scss']
 })
-export class SurveyEditorComponent implements OnInit  {
+export class SurveyEditorComponent implements OnInit {
   public editor: SurveyEditor.SurveyEditor;
+  public urlPrefix: string;
+
+  constructor(
+    private http: Http,
+    private surveyService: SurveyService,
+    private survey: Survey
+  ) {
+    this.urlPrefix = 'http://api.d3f.pw/admin';
+  }
 
   public ngOnInit() {
-    let editorOptions = {showEmbededSurveyTab: true};
+    let editorOptions = { showEmbededSurveyTab: true };
     this.editor = new SurveyEditor.SurveyEditor('surveyEditorContainer', editorOptions);
     this.editor.saveSurveyFunc = this.saveMySurvey;
   }
 
   private saveMySurvey = () => {
-    console.log(JSON.stringify(this.editor.text));
+    // this.http.post(this.urlPrefix + '/survey', { a: 'b' })
+    //   .map((response: Response) => response.json());
+    // let survey = JSON.stringify(this.editor.text);
+    // this.survey = this.editor.text;
+    this.surveyService.save( this.editor.text ).subscribe((survey) => { this.survey = survey; });
+  }
+  private jwt() {
+    let currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    if (currentUser && currentUser.token) {
+      let headers = new Headers({ Authorization: 'Bearer ' + currentUser.token });
+      return new RequestOptions({ headers });
+    }
   }
 }

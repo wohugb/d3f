@@ -10,7 +10,7 @@ import { SurveyMenu } from './survey.menu';
 import { SurveyDemo } from './survey.demo';
 
 @NgModule({
-  declarations: [ SurveyComponent, SurveyEditorComponent ],
+  declarations: [ SurveyComponent ],
   imports: [
     CommonModule,
     FormsModule,

@@ -5,36 +5,43 @@ import { User } from '../_models/index';
 
 @Injectable()
 export class UserService {
-    constructor(private http: Http) { }
+    public urlPrefix: string;
 
-    getAll() {
-        return this.http.get('/api/users', this.jwt()).map((response: Response) => response.json());
+    constructor(private http: Http) {
+      this.urlPrefix = 'http://api.d3f.pw/admin';
     }
 
-    getById(id: number) {
-        return this.http.get('/api/users/' + id, this.jwt()).map((response: Response) => response.json());
+    public getAll() {
+        return this.http.get(this.urlPrefix + '/manager',
+          this.jwt()).map((response: Response) => response.json());
     }
 
-    create(user: User) {
-        return this.http.post('/api/users', user, this.jwt()).map((response: Response) => response.json());
+    public getById(id: number) {
+        return this.http.get(this.urlPrefix + '/manager/' + id,
+          this.jwt()).map((response: Response) => response.json());
     }
 
-    update(user: User) {
-        return this.http.put('/api/users/' + user.id, user, this.jwt()).map((response: Response) => response.json());
+    public create(user: User) {
+        return this.http.post(this.urlPrefix + '/register', user,
+          this.jwt()).map((response: Response) => response.json());
     }
 
-    delete(id: number) {
-        return this.http.delete('/api/users/' + id, this.jwt()).map((response: Response) => response.json());
+    public update(user: User) {
+        return this.http.put(this.urlPrefix + '/manager/' + user.id, user,
+          this.jwt()).map((response: Response) => response.json());
     }
 
-    // private helper methods
+    public delete(id: number) {
+        return this.http.delete(this.urlPrefix + '/manager/' + id,
+          this.jwt()).map((response: Response) => response.json());
+    }
 
     private jwt() {
         // create authorization header with jwt token
         let currentUser = JSON.parse(localStorage.getItem('currentUser'));
         if (currentUser && currentUser.token) {
-            let headers = new Headers({ 'Authorization': 'Bearer ' + currentUser.token });
-            return new RequestOptions({ headers: headers });
+            let headers = new Headers({ Authorization: 'Bearer ' + currentUser.token });
+            return new RequestOptions({ headers });
         }
     }
 }

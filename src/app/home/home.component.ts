@@ -6,6 +6,8 @@ import {
 import { AppState } from '../app.service';
 import { Title } from './title';
 import { XLargeDirective } from './x-large';
+import { User } from '../_models';
+import { UserService } from '../_services';
 
 @Component({
   // The selector is what angular internally uses
@@ -22,22 +24,32 @@ import { XLargeDirective } from './x-large';
   templateUrl: './home.component.html'
 })
 export class HomeComponent implements OnInit {
+  public currentUser: User;
+  public users: User[] = [];
   // Set our default values
   public localState = { value: '' };
   // TypeScript public modifiers
   constructor(
     public appState: AppState,
-    public title: Title
-  ) {}
-
-  public ngOnInit() {
-    console.log('hello `Home` component');
-    // this.title.getData().subscribe(data => this.data = data);
+    public title: Title,
+    private userService: UserService
+  ) {
+    this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
   }
 
-  public submitState(value: string) {
-    console.log('submitState', value);
-    this.appState.set('value', value);
-    this.localState.value = '';
+  public ngOnInit() {
+    // this.title.getData().subscribe(data => this.data = data);
+    this.loadAllUsers();
+  }
+  public deleteUser(id: number) {
+    this.userService.delete(id).subscribe(() => { this.loadAllUsers(); });
+  }
+  // public submitState(value: string) {
+  //   console.log('submitState', value);
+  //   this.appState.set('value', value);
+  //   this.localState.value = '';
+  // }
+  private loadAllUsers() {
+    this.userService.getAll().subscribe((users) => { this.users = users; });
   }
 }

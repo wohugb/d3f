@@ -1,11 +1,11 @@
 import { SurveyComponent } from './survey.component';
-import { SurveyEditorComponent } from './+survey-editor/survey-editor.component';
 
 export const routes = [
-  { path: '',
-    component: SurveyComponent,
-    children: [
-    { path: '', component: SurveyEditorComponent },
-    { path: 'survey-editor', component: SurveyEditorComponent }
+  { path: '', children: [
+    { path: '', component: SurveyComponent },
+    { path: 'editor', loadChildren: './+survey-editor#SurveyEditorModule' },
+    { path: 'list', loadChildren: './+survey-list#SurveyListModule' },
+    { path: 'gatcher', loadChildren: './+survey-gatcher#SurveyGatcherModule' },
+    { path: 'renderer', loadChildren: './+survey-renderer#SurveyRendererModule' }
   ]},
 ];

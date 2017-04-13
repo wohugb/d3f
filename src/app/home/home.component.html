@@ -1,70 +1,9 @@
-<nav>
-  <a [routerLink]=" ['./'] "
-    routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}">
-    索引
-  </a>
-  <a [routerLink]=" ['./home'] "
-    routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}">
-    主页
-  </a>
-  <a [routerLink]=" ['./detail'] "
-    routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}">
-    详细
-  </a>
-  <a [routerLink]=" ['./barrel'] "
-    routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}">
-    滚筒
-  </a>
-  <a [routerLink]=" ['./about'] "
-    routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}">
-    关于
-  </a>
-  <a [routerLink]=" ['./division'] "
-    routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}">
-    行政区划
-  </a>
-  <a [routerLink]=" ['./survey'] "
-    routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}">
-    问卷调查
-  </a>
-</nav>
-
-<div>
-  <h1 x-large class="sample-content">Your Content Here</h1>
-
-  <hr>
-
-  <div>
-    For hot module reloading run
-    <pre>npm run start:hmr</pre>
-  </div>
-
-  <hr>
-
-  <div>
-    <h4>Local State</h4>
-
-    <form (ngSubmit)="submitState(localState.value)" autocomplete="off">
-
-      <input
-        [value]="localState.value"
-        (input)="localState.value = $event.target.value"
-        placeholder="Submit Local State to App State"
-        autofocus>
-
-      <button>Submit Value</button>
-    </form>
-    <!--
-        <input type="text" [value]="localState.value" (input)="localState.value = $event.target.value" autofocus>
-        Rather than wiring up two-way data-binding ourselves with [value] and (input)
-        we can use Angular's [(ngModel)] syntax
-        <input type="text" name="textInput" [(ngModel)]="localState.value" autofocus>
-      -->
-
-    <pre>this.localState = {{ localState | json }}</pre>
-
-  </div>
-
-</div>
-
-<a href="https://www.mockaroo.com/">生成mockdata</a>
+<md-list>
+  <h3 md-subheader>用户列表 <a [routerLink]="['/login']">退出</a></h3>
+  <md-list-item *ngFor="let user of users">
+    <md-icon md-list-avatar>account_circle</md-icon>
+    <h4 md-line>{{user.username}}<small>{{user.telephone}}</small></h4>
+    <p md-line> {{user.createdAt | date}} <a (click)="deleteUser(user.id)">锁定</a></p>
+  </md-list-item>
+  <md-divider></md-divider>
+</md-list>

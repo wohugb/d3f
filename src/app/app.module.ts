@@ -1,12 +1,13 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpModule, BaseRequestOptions } from '@angular/http';
 import { NgModule, ApplicationRef } from '@angular/core';
 import { removeNgStyles, createNewHosts, createInputTransfer } from '@angularclass/hmr';
 import { RouterModule, PreloadAllModules } from '@angular/router';
 import { MaterialModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import 'hammerjs';
+import { MockBackend, MockConnection } from '@angular/http/testing';
 
 /*
  * Platform and Environment providers/directives/pipes
@@ -23,7 +24,12 @@ import { AboutComponent } from './about';
 import { DivisionComponent } from './division';
 import { NoContentComponent } from './no-content';
 import { XLargeDirective } from './home/x-large';
-// import { SurveyComponent } from './survey';
+import { LoginComponent } from './login';
+import { RegisterComponent } from './register';
+
+import { AuthGuard } from './_guards';
+import { AlertService, AuthenticationService, UserService, SurveyService } from './_services';
+import { fakeBackendProvider } from './_helpers';
 
 import '../styles/styles.scss';
 import '../styles/headings.css';
@@ -50,11 +56,13 @@ type StoreType = {
     NoContentComponent,
     XLargeDirective,
     NavBarComponent,
-    // SurveyComponent
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [ // import Angular's modules
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpModule,
     MaterialModule,
     BrowserAnimationsModule,
@@ -62,7 +70,16 @@ type StoreType = {
   ],
   providers: [ // expose our Services and Providers into Angular's dependency injection
     ENV_PROVIDERS,
-    APP_PROVIDERS
+    APP_PROVIDERS,
+    AuthGuard,
+    AlertService,
+    AuthenticationService,
+    UserService,
+    SurveyService,
+    // providers used to create fake backend
+    fakeBackendProvider,
+    MockBackend,
+    BaseRequestOptions
   ]
 })
 export class AppModule {

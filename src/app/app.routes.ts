@@ -4,16 +4,20 @@ import { AboutComponent } from './about';
 import { DivisionComponent } from './division';
 import { SurveyComponent } from './survey';
 import { NoContentComponent } from './no-content';
-
+import { LoginComponent } from './login';
+import { RegisterComponent } from './register';
 import { DataResolver } from './app.resolver';
+import { AuthGuard } from './_guards';
 
 export const ROUTES: Routes = [
-  { path: '',      component: HomeComponent },
+  { path: '',      component: HomeComponent, canActivate: [AuthGuard] },
+  { path: 'login',  component: LoginComponent },
+  { path: 'register',  component: RegisterComponent },
   { path: 'home',  component: HomeComponent },
   { path: 'about', component: AboutComponent },
   { path: 'division', component: DivisionComponent },
   // { path: 'survey', component: SurveyComponent },
-  { path: 'survey', loadChildren: './+survey#SurveyModule'},
+  { path: 'survey', loadChildren: './+survey#SurveyModule', canActivate: [AuthGuard]},
   { path: 'detail', loadChildren: './+detail#DetailModule'},
   { path: 'barrel', loadChildren: './+barrel#BarrelModule'},
   { path: '**',    component: NoContentComponent },

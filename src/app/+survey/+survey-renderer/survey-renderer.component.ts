@@ -3,12 +3,10 @@ import * as Survey from 'survey-angular';
 
 @Component({
   selector: 'survey-renderer',
-  template: `<div class="survey-container contentcontainer codecontainer">
-    <div id="surveyElement"></div>
-    </div>`,
+  templateUrl: 'survey-renderer.component.html',
 })
-export class SurveyComponent implements OnInit {
-  @Input() json: any;
+export class SurveyRendererComponent implements OnInit {
+  @Input() public json: any;
 
   public ngOnInit() {
       let surveyModel = new Survey.ReactSurveyModel(this.json);

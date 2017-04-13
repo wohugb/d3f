@@ -9,23 +9,23 @@ import { AlertService, UserService } from '../_services/index';
 })
 
 export class RegisterComponent {
-    model: any = {};
-    loading = false;
+    public model: any = {};
+    public loading = false;
 
     constructor(
         private router: Router,
         private userService: UserService,
         private alertService: AlertService) { }
 
-    register() {
+    public register() {
         this.loading = true;
         this.userService.create(this.model)
             .subscribe(
-                data => {
-                    this.alertService.success('Registration successful', true);
+                (data) => {
+                    this.alertService.success('注册成功', true);
                     this.router.navigate(['/login']);
                 },
-                error => {
+                (error) => {
                     this.alertService.error(error);
                     this.loading = false;
                 });

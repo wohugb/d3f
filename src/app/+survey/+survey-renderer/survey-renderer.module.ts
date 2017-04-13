@@ -3,12 +3,12 @@ import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
-import { routes } from './survey-editor.routes';
-import { SurveyEditorComponent } from './survey-editor.component';
+import { routes } from './survey-renderer.routes';
+import { SurveyRendererComponent } from './survey-renderer.component';
 
 @NgModule({
   declarations: [
-    SurveyEditorComponent,
+    SurveyRendererComponent,
   ],
   imports: [
     CommonModule,
@@ -16,6 +16,6 @@ import { SurveyEditorComponent } from './survey-editor.component';
     RouterModule.forChild(routes),
   ],
 })
-export class SurveyEditorModule {
+export class SurveyRendererModule {
   public static routes = routes;
 }
