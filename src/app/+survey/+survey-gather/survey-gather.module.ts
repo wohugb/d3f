@@ -3,26 +3,24 @@ import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { MaterialModule } from '@angular/material';
-import { QRCodeModule } from 'angular2-qrcode';
 
-import { SurveyListComponent } from './survey-list.component';
-import { SurveyQrcodeDialogComponent } from './survey-qrcode-dialog';
-import { routes } from './survey-list.routes';
+import { SurveyGatherComponent } from './survey-gather.component';
+import { GatherDetialDialogComponent } from './gather-detail.dialog';
+import { routes } from './survey-gather.routes';
 
 @NgModule({
   declarations: [
-    SurveyListComponent,
-    SurveyQrcodeDialogComponent
+    SurveyGatherComponent,
+    GatherDetialDialogComponent
   ],
   imports: [
     CommonModule,
     FormsModule,
     MaterialModule,
-    QRCodeModule,
     RouterModule.forChild(routes),
   ],
-  bootstrap: [SurveyListComponent, SurveyQrcodeDialogComponent],
+  bootstrap: [SurveyGatherComponent, GatherDetialDialogComponent]
 })
-export class SurveyListModule {
+export class SurveyGatherModule {
   public static routes = routes;
 }

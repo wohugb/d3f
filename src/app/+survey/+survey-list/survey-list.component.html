@@ -1,1 +1,27 @@
-<div id="surveyList"></div>
+<h3 md-subheader>表单列表</h3>
+<form name="form" (ngSubmit)="f.form.valid && addSurvey()" #f="ngForm" novalidate>
+  <table cellspacing="0"><tr>
+    <td>
+      <md-input-container>
+        <input mdInput placeholder="表单名" name="title" [(ngModel)]="model.title" required>
+        <md-error>表单名必须输入</md-error>
+      </md-input-container>
+    </td>
+    <td>
+      <button md-raised-button [disabled]="loading">创建</button>
+    </td>
+  </tr></table>
+</form>
+<md-list>
+  <md-divider></md-divider>
+  <md-list-item *ngFor="let survey of surveys">
+    <md-icon md-list-avatar>receipt</md-icon>
+    <a md-line href="http://wx.d3f.pw/?survey={{survey.id}}" target="_blank">{{survey.title}}</a>
+    <p md-line> {{survey.createdAt | date:'yy-MM-dd HH:mm:ss'}}
+      <a [routerLink]="['/survey/editor/',survey.id]">编辑</a>
+      <a (click)="deleteSurvey(survey.id)">删除</a>
+      <a (click)="openDialog(survey)">二维码</a>
+    </p>
+  </md-list-item>
+  <md-divider></md-divider>
+</md-list>

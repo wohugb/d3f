@@ -1,0 +1,12 @@
+<h3 md-subheader>搜集列表</h3>
+<md-list>
+  <md-divider></md-divider>
+  <md-list-item *ngFor="let gather of gathers">
+    <md-icon md-list-avatar>receipt</md-icon>
+    <h4 md-line>[用户]-{{gather.survey.title}}</h4>
+    <p md-line> {{gather.createdAt | date:'yy-MM-dd HH:mm:ss'}}
+      <a (click)="openDialog(gather)">投票结果</a>
+    </p>
+  </md-list-item>
+  <md-divider></md-divider>
+</md-list>

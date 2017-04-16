@@ -8,9 +8,6 @@ const SMALL_WIDTH_BREAKPOINT = 840;
 
 @Component({
   selector: 'app-survey-sidenav',
-  // If you want to show survey, uncomment the line below
-  // template: `<h1>Survey</h1><survey [json]="json"></survey>`
-  // If you want to show survey editor, uncomment the line below
   templateUrl: 'survey.component.html',
   styleUrls: ['survey.component.scss'],
   encapsulation: ViewEncapsulation.None,

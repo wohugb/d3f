@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { NgModule, OnInit } from '@angular/core';
+import { RouterModule, ActivatedRoute } from '@angular/router';
 
 import { routes } from './survey-renderer.routes';
 import { SurveyRendererComponent } from './survey-renderer.component';
@@ -18,4 +18,8 @@ import { SurveyRendererComponent } from './survey-renderer.component';
 })
 export class SurveyRendererModule {
   public static routes = routes;
+  constructor(
+    private route: ActivatedRoute) {
+    this.route = route;
+  }
 }

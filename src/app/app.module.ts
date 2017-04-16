@@ -28,7 +28,8 @@ import { LoginComponent } from './login';
 import { RegisterComponent } from './register';
 
 import { AuthGuard } from './_guards';
-import { AlertService, AuthenticationService, UserService, SurveyService } from './_services';
+import { HttpService, AlertService, AuthenticationService,
+  UserService, SurveyService } from './_services';
 import { fakeBackendProvider } from './_helpers';
 
 import '../styles/styles.scss';
@@ -71,6 +72,7 @@ type StoreType = {
   providers: [ // expose our Services and Providers into Angular's dependency injection
     ENV_PROVIDERS,
     APP_PROVIDERS,
+    HttpService,
     AuthGuard,
     AlertService,
     AuthenticationService,

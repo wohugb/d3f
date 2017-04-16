@@ -1,5 +1,5 @@
 import { SurveyEditorComponent } from './survey-editor.component';
 
 export const routes = [
-  { path: '', component: SurveyEditorComponent,  pathMatch: 'full' },
+  { path: ':id', component: SurveyEditorComponent,  pathMatch: 'full' },
 ];
