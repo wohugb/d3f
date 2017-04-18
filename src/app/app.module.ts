@@ -3,11 +3,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule, BaseRequestOptions } from '@angular/http';
 import { NgModule, ApplicationRef } from '@angular/core';
 import { removeNgStyles, createNewHosts, createInputTransfer } from '@angularclass/hmr';
-import { RouterModule, PreloadAllModules } from '@angular/router';
+import { RouterModule, PreloadAllModules, Router } from '@angular/router';
 import { MaterialModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import 'hammerjs';
 import { MockBackend, MockConnection } from '@angular/http/testing';
+import { RestangularModule, Restangular } from 'ngx-restangular';
 
 /*
  * Platform and Environment providers/directives/pipes
@@ -30,10 +31,12 @@ import { RegisterComponent } from './register';
 import { AuthGuard } from './_guards';
 import { HttpService, AlertService, AuthenticationService,
   UserService, SurveyService } from './_services';
+import { ConfService } from './conf/conf.service';
 import { fakeBackendProvider } from './_helpers';
 
 import '../styles/styles.scss';
 import '../styles/headings.css';
+import { ConfComponent } from './conf/conf.component';
 
 // Application wide providers
 const APP_PROVIDERS = [...APP_RESOLVER_PROVIDERS, AppState];
@@ -44,6 +47,49 @@ type StoreType = {
   disposeOldHosts: () => void
 };
 
+// Function for settting the default restangular configuration
+export function RestangularConfigFactory (RestangularProvider, AuthenticationService) {
+  RestangularProvider.setBaseUrl('http://api.d3f.pw/admin');
+  // set static header
+  RestangularProvider.setDefaultHeaders({
+    Authorization: 'Bearer UDXPx-Xko0w4BRKajozCVy20X11MRZs1'
+  });
+  // by each request to the server receive a token and update headers with it
+  RestangularProvider
+    .addFullRequestInterceptor((element, operation, path, url, headers, params) => {
+      // let bearerToken = AuthenticationService.getBearerToken();
+      let currentUser = JSON.parse(localStorage.getItem('currentUser'));
+      let bearerToken = '';
+      if (currentUser && currentUser.token) {
+          bearerToken = currentUser.token;
+      }
+      return {
+        headers: Object.assign({}, headers, {Authorization: `Bearer ${bearerToken}`})
+      };
+    });
+  RestangularProvider.addErrorInterceptor((response, subject, responseHandler) => {
+    // if (response.status === 403) {
+    //   refreshAccesstoken()
+    //     .switchMap(refreshAccesstokenResponse => {
+    //       response.request.headers.set('Authorization', 'Bearer ' + refreshAccesstokenResponse)
+    //       return response.repeatRequest(response.request);
+    //     })
+    //     .subscribe(
+    //       (res) => responseHandler(res),
+    //       (err) => subject.error(err)
+    //     );
+    //   return false;
+    // }
+    if (response.status === 401) {
+      // location.href = '/login';
+      let router: Router;
+      router.navigate(['/login']);
+      return false;
+    }
+    return true;
+  });
+}
+
 /**
  * `AppModule` is the main entry point into Angular2's bootstraping process
  */
@@ -52,13 +98,13 @@ type StoreType = {
   declarations: [
     AppComponent,
     AboutComponent,
-    DivisionComponent,
     HomeComponent,
     NoContentComponent,
     XLargeDirective,
     NavBarComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    ConfComponent
   ],
   imports: [ // import Angular's modules
     BrowserModule,
@@ -67,7 +113,8 @@ type StoreType = {
     HttpModule,
     MaterialModule,
     BrowserAnimationsModule,
-    RouterModule.forRoot(ROUTES, { useHash: false, preloadingStrategy: PreloadAllModules })
+    RouterModule.forRoot(ROUTES, { useHash: false, preloadingStrategy: PreloadAllModules }),
+    RestangularModule.forRoot(RestangularConfigFactory)
   ],
   providers: [ // expose our Services and Providers into Angular's dependency injection
     ENV_PROVIDERS,
@@ -78,6 +125,7 @@ type StoreType = {
     AuthenticationService,
     UserService,
     SurveyService,
+    ConfService,
     // providers used to create fake backend
     fakeBackendProvider,
     MockBackend,

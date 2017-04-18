@@ -1,0 +1,19 @@
+{
+  "apps":[{
+    "name"             : "d3f-serve",
+    "cwd"              : "./",
+    "script"           : "app.js",
+    "log_date_format"  : "YYYY-MM-DD HH:mm Z",
+    "ignore_watch"     : ["[\\/\\\\]\\./", "node_modules","data",".git","logs"],
+    "merge_logs"       : true,
+    "exec_mode"        : "cluster_mode",
+    "instances"        : 0,
+    "env": {
+      "NODE_ENV"        : "production",
+      "NODE_DEBUG"      : "request",
+      "APP"             : "d3fapp"
+    },
+    "args"             : ["--color"],
+    "node_args"        : ["--debug=7000","--trace-deprecation"]
+  }]
+}

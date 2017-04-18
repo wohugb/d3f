@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions, Response } from '@angular/http';
+import { Restangular } from 'ngx-restangular';
 
 import { User } from '../_models/index';
 
@@ -7,13 +8,16 @@ import { User } from '../_models/index';
 export class UserService {
     public urlPrefix: string;
 
-    constructor(private http: Http) {
+    constructor(
+      private http: Http,
+      private restangular: Restangular
+    ) {
       this.urlPrefix = 'http://api.d3f.pw/admin';
     }
 
     public getAll() {
-        return this.http.get(this.urlPrefix + '/manager',
-          this.jwt()).map((response: Response) => response.json());
+        return this.restangular.all('manager').getList();
+
     }
 
     public getById(id: number) {

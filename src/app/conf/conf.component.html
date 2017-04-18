@@ -1,1 +1,36 @@
-列表，创建
+<h3 md-subheader>会议管理</h3>
+<form name="form" (ngSubmit)="f.form.valid && addConf()" #f="ngForm" novalidate>
+  <p>
+    <md-input-container>
+      <input mdInput placeholder="会议名称" name="title" [(ngModel)]="model.title" required>
+      <md-error>会议名称</md-error>
+    </md-input-container>
+  </p>
+  <p>
+    <md-input-container>
+      <input mdInput placeholder="管理员账号" name="manager" [(ngModel)]="model.manager" required>
+      <md-error>管理员账号</md-error>
+    </md-input-container>
+  <p>
+    <md-input-container>
+      <input mdInput placeholder="管理员密码" name="password" [(ngModel)]="model.password" required>
+      <md-error>管理员密码</md-error>
+    </md-input-container>
+  </p>
+  <p>
+    <button md-raised-button [disabled]="loading">创建</button>
+  </p>
+</form>
+<md-list>
+  <md-divider></md-divider>
+  <md-list-item *ngFor="let conf of confs">
+    <md-icon md-list-avatar>receipt</md-icon>
+    <a md-line href="http://wx.d3f.pw/?conf={{survey.id}}" target="_blank">{{conf.title}}</a>
+    <p md-line> {{conf.createdAt | date:'yy-MM-dd HH:mm:ss'}}
+      <a [routerLink]="['/survey/editor/',conf.id]">编辑</a>
+      <a (click)="deleteConf(conf.id)">删除</a>
+      <a (click)="openDialog(conf)">二维码</a>
+    </p>
+  </md-list-item>
+  <md-divider></md-divider>
+</md-list>
